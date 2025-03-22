@@ -11,12 +11,12 @@ export const api = axios.create({
 
 export const fetchPosts = async () => {
   const token = localStorage.getItem("token");
-
   const response = await api.get("posts/", {
     headers: {
-      Authorization: `Bearer ${token}`, // ✅ обязательно
+      Authorization: `Bearer ${token}`,
     },
   });
-
   return response.data;
 };
+
+

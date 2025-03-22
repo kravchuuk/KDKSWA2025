@@ -8,8 +8,11 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 # Создаем маршрутизатор API
 router = DefaultRouter()
-router.register(r'posts', PostViewSet)
-
+router.register('posts', PostViewSet)
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 # Объявляем urlpatterns перед использованием static()
 urlpatterns = [
     path('admin/', admin.site.urls),
