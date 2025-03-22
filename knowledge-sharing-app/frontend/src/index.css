@@ -1,3 +1,4 @@
+/* Базовые стили */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -6,12 +7,14 @@ body {
   color: #333;
 }
 
+/* Контейнер */
 .container {
   width: 80%;
   margin: auto;
   padding: 20px;
 }
 
+/* Навигация */
 nav {
   background: #007bff;
   padding: 15px;
@@ -23,17 +26,41 @@ nav a {
   text-decoration: none;
   margin: 0 15px;
   font-size: 18px;
+  transition: color 0.2s ease;
 }
 
+nav a:hover {
+  color: #d4e6fc;
+}
+
+/* Карточка поста */
 .card {
   background: white;
   padding: 15px;
   margin: 10px 0;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.button {
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Картинка поста */
+.card img {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+/* Кнопки */
+.button,
+.auth-button,
+.post-button {
   background: #007bff;
   color: white;
   padding: 10px 15px;
@@ -41,49 +68,22 @@ nav a {
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 10px;
+  transition: background 0.3s;
 }
 
-.button:hover {
+.button:hover,
+.auth-button:hover,
+.post-button:hover {
   background: #0056b3;
 }
 
-.login-container {
-  max-width: 300px;
-  margin: 100px auto;
-  padding: 20px;
-  background: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  border-radius: 8px;
-}
-
-.login-form {
-  display: flex;
-  flex-direction: column;
-}
-
-.input-field {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.login-button {
-  background: #007bff;
-  color: white;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.login-button:hover {
-  background: #0056b3;
-}
+/* Формы логина/регистрации и поста */
 .auth-container,
-.post-container {
+.post-container,
+.login-container {
   max-width: 400px;
   margin: 100px auto;
   padding: 20px;
@@ -94,7 +94,8 @@ nav a {
 }
 
 .auth-form,
-.post-form {
+.post-form,
+.login-form {
   display: flex;
   flex-direction: column;
 }
@@ -108,17 +109,25 @@ nav a {
   border-radius: 5px;
 }
 
-.auth-button,
-.post-button {
-  background: #007bff;
-  color: white;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
+/* Адаптивность */
+@media (max-width: 600px) {
+  .container {
+    width: 95%;
+    padding: 10px;
+  }
 
-.auth-button:hover,
-.post-button:hover {
-  background: #0056b3;
+  .card {
+    padding: 10px;
+  }
+
+  nav a {
+    display: block;
+    margin: 10px 0;
+  }
+
+  .auth-container,
+  .post-container,
+  .login-container {
+    margin: 60px auto;
+  }
 }

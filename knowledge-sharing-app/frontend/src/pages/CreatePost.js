@@ -53,7 +53,7 @@ const CreatePost = () => {
         <input type="text" placeholder="Заголовок" value={title} onChange={(e) => setTitle(e.target.value)} />
         <textarea placeholder="Содержание" value={content} onChange={(e) => setContent(e.target.value)} />
         <input type="file" onChange={(e) => setImage(e.target.files[0])} />
-        <button type="submit">Опубликовать</button>
+        <button type="submit" className="post-button">Опубликовать</button>
       </form>
     </div>
   );

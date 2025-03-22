@@ -10,6 +10,13 @@ export const api = axios.create({
 });
 
 export const fetchPosts = async () => {
-  const response = await api.get("posts/");
+  const token = localStorage.getItem("token");
+
+  const response = await api.get("posts/", {
+    headers: {
+      Authorization: `Bearer ${token}`, // ✅ обязательно
+    },
+  });
+
   return response.data;
 };

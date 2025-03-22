@@ -4,4 +4,5 @@ from .models import Post
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = '__all__'
+        fields = ['id', 'title', 'content', 'image', 'user', 'created_at']
+        read_only_fields = ['user', 'created_at']  # ✅
