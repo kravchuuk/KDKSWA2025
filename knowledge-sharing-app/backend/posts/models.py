@@ -1,5 +1,10 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
-from users.models import CustomUser
+
+class CustomUser(AbstractUser):
+    # Можем добавить поля позже
+    pass
+
 
 class Post(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
@@ -10,3 +15,4 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
