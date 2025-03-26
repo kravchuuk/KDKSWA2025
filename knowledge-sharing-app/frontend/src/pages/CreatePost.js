@@ -1,62 +1,54 @@
+// frontend/src/pages/Register.js
+
 import React, { useState } from "react";
-import axios from "axios"; // ✅ Импортируем axios
+import axios from "axios";
 
-const API_BASE_URL = "http://127.0.0.1:8000/api/"; // ✅ Убедитесь, что порт правильный
+const Register = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
-const CreatePost = () => {
-  const [title, setTitle] = useState(""); // ✅ Добавляем состояние
-  const [content, setContent] = useState("");
-  const [image, setImage] = useState(null);
-
-  const handleSubmit = async (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
-    console.log("Форма отправлена!"); // ✅ Проверяем, работает ли обработчик
-
-    const token = localStorage.getItem("token");
-    if (!token) {
-      alert("Вы не авторизованы!");
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("content", content);
-    if (image) {
-      formData.append("image", image);
-    }
-
-    console.log("Отправляем данные:", Object.fromEntries(formData.entries())); // ✅ Проверяем отправляемые данные
-
     try {
-      const response = await axios.post(`${API_BASE_URL}posts/`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${token}`,
-        },
+      await axios.post("http://127.0.0.1:8000/api/register/", {
+        username,
+        password,
       });
-
-      console.log("Пост создан:", response.data);
-      alert("Пост успешно опубликован!");
-      setTitle("");
-      setContent("");
-      setImage(null);
-    } catch (error) {
-      console.error("Ошибка создания поста:", error.response ? error.response.data : error);
-      alert("Ошибка создания поста!");
+      alert("Registration successful!");
+      window.location.href = "/login";
+    } catch (err) {
+      alert("Registration failed.");
     }
   };
 
   return (
-    <div className="post-container">
-      <h1>Создать пост</h1>
-      <form className="post-form" onSubmit={handleSubmit}>
-        <input type="text" placeholder="Заголовок" value={title} onChange={(e) => setTitle(e.target.value)} />
-        <textarea placeholder="Содержание" value={content} onChange={(e) => setContent(e.target.value)} />
-        <input type="file" onChange={(e) => setImage(e.target.files[0])} />
-        <button type="submit" className="post-button">Опубликовать</button>
+    <div className="container mt-5" style={{ maxWidth: "400px" }}>
+      <h2>Register</h2>
+      <form onSubmit={handleRegister}>
+        <div className="mb-3">
+          <input
+            type="text"
+            placeholder="Username"
+            className="form-control"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </div>
+        <div className="mb-3">
+          <input
+            type="password"
+            placeholder="Password"
+            className="form-control"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <button type="submit" className="btn btn-success w-100">
+          Register
+        </button>
       </form>
     </div>
   );
 };
 
-export default CreatePost;
+export default Register;
